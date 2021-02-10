@@ -204,6 +204,205 @@
                     }
                 }
             }
+        },
+        "/productLogs": {
+            "get": {
+                "tags": [
+                    "ProductLog"
+                ],
+                "summary": "Get a listing of the ProductLogs.",
+                "description": "Get all ProductLogs",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/ProductLog"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "ProductLog"
+                ],
+                "summary": "Store a newly created ProductLog in storage",
+                "description": "Store ProductLog",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "ProductLog that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ProductLog"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/ProductLog"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/productLogs/{id}": {
+            "get": {
+                "tags": [
+                    "ProductLog"
+                ],
+                "summary": "Display the specified ProductLog",
+                "description": "Get ProductLog",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of ProductLog",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/ProductLog"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "ProductLog"
+                ],
+                "summary": "Update the specified ProductLog in storage",
+                "description": "Update ProductLog",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of ProductLog",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "ProductLog that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ProductLog"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/ProductLog"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ProductLog"
+                ],
+                "summary": "Remove the specified ProductLog from storage",
+                "description": "Delete ProductLog",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of ProductLog",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -224,6 +423,43 @@
                 "description": {
                     "description": "description",
                     "type": "string"
+                },
+                "quantity": {
+                    "description": "quantity",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "price": {
+                    "description": "price",
+                    "type": "number",
+                    "format": "number"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "ProductLog": {
+            "required": [
+                "id_product"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "id_product": {
+                    "description": "id_product",
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "quantity": {
                     "description": "quantity",
