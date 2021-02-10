@@ -2,23 +2,22 @@
 
 namespace App\Repositories;
 
-use App\Models\Product;
+use App\Models\ProductLog;
 use App\Repositories\BaseRepository;
 
 /**
- * Class ProductRepository
+ * Class ProductLogRepository
  * @package App\Repositories
- * @version February 10, 2021, 3:43 pm UTC
+ * @version February 10, 2021, 3:48 pm UTC
 */
 
-class ProductRepository extends BaseRepository
+class ProductLogRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        'name',
-        'description',
+        'id_product',
         'quantity',
         'price'
     ];
@@ -38,6 +37,6 @@ class ProductRepository extends BaseRepository
      **/
     public function model()
     {
-        return Product::class;
+        return ProductLog::class;
     }
 }

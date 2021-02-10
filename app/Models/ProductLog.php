@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @SWG\Definition(
- *      definition="Product",
- *      required={""},
+ *      definition="ProductLog",
+ *      required={"id_product"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -17,14 +17,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="name",
- *          description="name",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="description",
- *          description="description",
- *          type="string"
+ *          property="id_product",
+ *          description="id_product",
+ *          type="integer",
+ *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="quantity",
@@ -52,12 +48,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *      )
  * )
  */
-class Product extends Model
+class ProductLog extends Model
 {
 
     use HasFactory;
 
-    public $table = 'product';
+    public $table = 'log_product';
     
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
@@ -66,8 +62,7 @@ class Product extends Model
 
 
     public $fillable = [
-        'name',
-        'description',
+        'id_product',
         'quantity',
         'price'
     ];
@@ -79,8 +74,7 @@ class Product extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'name' => 'string',
-        'description' => 'string',
+        'id_product' => 'integer',
         'quantity' => 'integer',
         'price' => 'decimal:2'
     ];
@@ -91,8 +85,7 @@ class Product extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'nullable|string|max:100',
-        'description' => 'nullable|string',
+        'id_product' => 'required|integer',
         'quantity' => 'nullable|integer',
         'price' => 'nullable|numeric',
         'created_at' => 'nullable',
@@ -100,10 +93,10 @@ class Product extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function logProducts()
+    public function idProduct()
     {
-        return $this->hasMany(\App\Models\LogProduct::class, 'id_product');
+        return $this->belongsTo(\App\Models\Product::class, 'id_product');
     }
 }
