@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::resource('products', ProductAPIController::class);
+Route::resource('product', ProductAPIController::class);
 
 
 Route::resource('product_logs', ProductLogAPIController::class);
