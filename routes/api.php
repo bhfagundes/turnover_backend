@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+//use App\Http\Controllers\API\ProductAPIController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,5 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('product', ProductAPIController::class);
 
+Route::delete('product', [App\Http\Controllers\API\ProductAPIController::class,'destroyMassive']);
+
+Route::patch('product', [App\Http\Controllers\API\ProductAPIController::class,'updateMassive']);
 
 Route::resource('product_logs', ProductLogAPIController::class);

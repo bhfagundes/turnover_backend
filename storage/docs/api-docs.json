@@ -39,6 +39,46 @@
                     }
                 }
             },
+            "put": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Update all specified Product in storage",
+                "description": "Update Massive Product",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Product that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Product"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Product"
@@ -69,6 +109,44 @@
                                 },
                                 "data": {
                                     "$ref": "#/definitions/Product"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Remove the specified Product from storage",
+                "description": "Delete Product",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "ids",
+                        "in": "path",
+                        "description": "Array id's of Product",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
                                 },
                                 "message": {
                                     "type": "string"

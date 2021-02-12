@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateProductAPIRequest;
 use App\Http\Requests\API\UpdateProductAPIRequest;
+use App\Http\Requests\API\DestroyProductAPIRequest;
 use App\Models\Product;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
@@ -228,6 +229,53 @@ class ProductAPIController extends AppBaseController
         return $this->sendResponse(new ProductResource($product), 'Product updated successfully');
     }
 
+
+    /**
+     *
+     * @param UpdateProductAPIRequest $request
+     * @return Response
+     *
+     * @SWG\Put(
+     *      path="/products",
+     *      summary="Update all specified Product in storage",
+     *      tags={"Product"},
+     *      description="Update Massive Product",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Product that should be updated",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/Product")
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Product"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function updateMassive(UpdateProductAPIRequest $request)
+    {
+        $input = $request->all();
+        /** @var Product $product */
+        $products = Product::WhereIN('id',$input['id'])->update($input['fieldsUpdated']);
+        return $this->sendResponse($products,'Products updated successfully');
+    }
     /**
      * @param int $id
      * @return Response
@@ -277,6 +325,52 @@ class ProductAPIController extends AppBaseController
 
         $product->delete();
 
+        return $this->sendSuccess('Product deleted successfully');
+    }
+     /**
+     *
+     * @return Response
+     *
+     * @SWG\Delete(
+     *      path="/products",
+     *      summary="Remove the specified Product from storage",
+     *      tags={"Product"},
+     *      description="Delete Product",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="ids",
+     *          description="Array id's of Product",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function destroyMassive(DestroyProductAPIRequest $request)
+    {
+
+        $input = $request->all();
+        /** @var Product $product */
+        $products = Product::WhereIN('id',$input['id'])->delete();
         return $this->sendSuccess('Product deleted successfully');
     }
 }
