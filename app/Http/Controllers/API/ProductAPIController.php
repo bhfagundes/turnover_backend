@@ -333,7 +333,7 @@ class ProductAPIController extends AppBaseController
      *
      * @SWG\Delete(
      *      path="/products",
-     *      summary="Remove the specified Product from storage",
+     *      summary="Remove all specified Product from storage",
      *      tags={"Product"},
      *      description="Delete Product",
      *      produces={"application/json"},
