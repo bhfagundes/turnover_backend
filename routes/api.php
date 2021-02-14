@@ -25,4 +25,4 @@ Route::delete('product', [App\Http\Controllers\API\ProductAPIController::class,'
 
 Route::patch('product', [App\Http\Controllers\API\ProductAPIController::class,'updateMassive']);
 
-Route::resource('product_logs', ProductLogAPIController::class);
+Route::resource('productLogs', ProductLogAPIController::class);

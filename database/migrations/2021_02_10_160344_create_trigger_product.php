@@ -15,11 +15,11 @@ class CreateTriggerProduct extends Migration
     {
         DB::unprepared('CREATE  TRIGGER `product_AFTER_UPDATE` AFTER UPDATE ON `product` FOR EACH ROW
         BEGIN
-         IF(NEW.quantity <> OLD.quantity)
+         IF(NEW.quantity <> OLD.quantity or NEW.price <> OLD.price)
          THEN
             INSERT INTO log_product (id_product,quantity,price,created_at,updated_at)
                 VALUES
-                (NEW.id, NEW.quantity,NEW.price,current_timestamp, current_timestamp);
+                (NEW.id, OLD.quantity,OLD.price,current_timestamp, current_timestamp);
          END IF;
         END');
 

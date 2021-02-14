@@ -123,7 +123,7 @@
                 "tags": [
                     "Product"
                 ],
-                "summary": "Remove the specified Product from storage",
+                "summary": "Remove all specified Product from storage",
                 "description": "Delete Product",
                 "produces": [
                     "application/json"

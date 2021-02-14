@@ -156,14 +156,10 @@ class ProductLogAPIController extends AppBaseController
      */
     public function show($id)
     {
+
         /** @var ProductLog $productLog */
-        $productLog = $this->productLogRepository->find($id);
-
-        if (empty($productLog)) {
-            return $this->sendError('Product Log not found');
-        }
-
-        return $this->sendResponse(new ProductLogResource($productLog), 'Product Log retrieved successfully');
+        $productLog = ProductLog::where('id_product',$id)->orderBy('id','DESC')->get();
+        return $this->sendResponse($productLog, 'Product Log retrieved successfully');
     }
 
     /**
